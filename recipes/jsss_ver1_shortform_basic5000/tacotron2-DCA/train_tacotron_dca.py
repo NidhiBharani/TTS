@@ -1,7 +1,8 @@
 import os
-
 from trainer import Trainer, TrainerArgs
-
+import sys
+import TTS
+print(os.path.dirname(TTS.__file__))
 from TTS.config.shared_configs import BaseAudioConfig
 from TTS.tts.configs.shared_configs import BaseDatasetConfig
 from TTS.tts.configs.tacotron2_config import Tacotron2Config
@@ -13,7 +14,8 @@ from TTS.utils.audio import AudioProcessor
 
 # from TTS.tts.datasets.tokenizer import Tokenizer
 
-output_path = os.path.dirname(os.path.abspath(__file__))
+#output_path = os.path.dirname(os.path.abspath(__file__))
+output_path = "../jsss_ver1_shortform_basic5000-1.1/"
 print(output_path)
 
 # init configs
@@ -35,7 +37,7 @@ def formatter(root_path, manifest_file, **kwargs):  # pylint: disable=unused-arg
     speaker_name = "my_speaker"
     with open(txt_file, "r", encoding="utf-8") as ttf:
         for line in ttf:
-            print("___________________________________________________________________________")
+            print("________________________________________________________________________")
             cols = line.split("\t")
             print(cols)
             wav_file = os.path.join(root_path, "wavs", cols[0])
@@ -112,6 +114,9 @@ tokenizer, config = TTSTokenizer.init_from_config(config)
 # load training samples
 train_samples, eval_samples = load_tts_samples(dataset_config, eval_split=True, formatter=formatter)
 
+print("______________________________________Train_samples[0]________________________________________________")
+print(train_samples[0])
+
 # INITIALIZE THE MODEL
 # Models take a config object and a speaker manager as input
 # Config defines the details of the model like the number of layers, the size of the embedding, etc.
@@ -122,7 +127,27 @@ model = Tacotron2(config, ap, tokenizer)
 # Trainer provides a generic API to train all the 🐸TTS models with all its perks like mixed-precision training,
 # distributed training, etc.
 trainer = Trainer(
-    TrainerArgs(), config, output_path, model=model, train_samples= train_samples, eval_samples= eval_samples)
+     TrainerArgs(),config, output_path = output_path, model=model, train_samples= train_samples, eval_samples= eval_samples)
 
 # AND... 3,2,1... 🚀
 trainer.fit()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

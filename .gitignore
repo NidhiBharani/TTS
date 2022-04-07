@@ -167,3 +167,4 @@ wandb
 depot/*
 coqui_recipes/*
 output/
+coqui/
