@@ -17,3 +17,9 @@ print(output_path)
 #debugging FileNotFound error on a wav file sample
 filename = '/home/nidhi/Documents/animedub/audio/data/jsss_ver1/short-form/basic5000/wavs/BASIC5000_2771.wav'
 print(os.stat(filename).st_size)
+
+#debugging AssertionError in sample_rate vs sr in audio.py
+import soundfile as sf
+x, sr = sf.read(filename)
+print(x)
+print(sr)

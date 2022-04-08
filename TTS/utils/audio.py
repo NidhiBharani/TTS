@@ -829,6 +829,7 @@ class AudioProcessor(object):
         Returns:
             np.ndarray: Loaded waveform.
         """
+        print(sr)
         if self.resample:
             # loading with resampling. It is significantly slower.
             x, sr = librosa.load(filename, sr=self.sample_rate)

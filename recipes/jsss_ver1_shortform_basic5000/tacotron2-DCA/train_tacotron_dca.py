@@ -35,22 +35,20 @@ def formatter(root_path, manifest_file, **kwargs):  # pylint: disable=unused-arg
     txt_file = os.path.join(root_path, manifest_file)
     items = []
     speaker_name = "my_speaker"
+    print("Speaker name is :",speaker_name)
+    print(txt_file)
     with open(txt_file, "r", encoding="utf-8") as ttf:
         for line in ttf:
-            print("________________________________________________________________________")
             cols = line.split("\t")
-            print(cols)
-            wav_file = os.path.join(root_path, "wavs", cols[0])
-            print(wav_file)
+            wav_file = os.path.join(root_path, "wavs", cols[0]) + ".wav"
             text = cols[1]
             items.append({"text":text, "audio_file":wav_file, "speaker_name":speaker_name})
-            print("append_complete")
     return items
 
 #print(wav_file)
 
 audio_config = BaseAudioConfig(
-    sample_rate=22050,
+    sample_rate=24000,
     do_trim_silence=True,
     trim_db=60.0,
     signal_norm=False,
@@ -113,9 +111,6 @@ tokenizer, config = TTSTokenizer.init_from_config(config)
 #train_samples, eval_samples = load_tts_samples(dataset_config, eval_split=True)
 # load training samples
 train_samples, eval_samples = load_tts_samples(dataset_config, eval_split=True, formatter=formatter)
-
-print("______________________________________Train_samples[0]________________________________________________")
-print(train_samples[0])
 
 # INITIALIZE THE MODEL
 # Models take a config object and a speaker manager as input
