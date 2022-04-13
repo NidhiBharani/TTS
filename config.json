@@ -1,5 +1,5 @@
 {
-    "output_path": "../jsss_ver1_shortform_basic5000-1.1/",
+    "output_path": "/home/nidhi/Documents/animedub/audio/TTS/recipes/ljspeech/tacotron2-DCA",
     "logger_uri": null,
     "run_name": "run",
     "project_name": null,
@@ -22,9 +22,9 @@
     "distributed_backend": "nccl",
     "distributed_url": "tcp://localhost:54321",
     "mixed_precision": false,
-    "epochs": 1000,
-    "batch_size": 64,
-    "eval_batch_size": 16,
+    "epochs": 5,
+    "batch_size": 8,
+    "eval_batch_size": 8,
     "grad_clip": 5.0,
     "scheduler_after_epoch": true,
     "lr": 0.0001,
@@ -56,7 +56,7 @@
         "frame_shift_ms": null,
         "frame_length_ms": null,
         "stft_pad_mode": "reflect",
-        "sample_rate": 24000,
+        "sample_rate": 22050,
         "resample": false,
         "preemphasis": 0.0,
         "ref_level_db": 20,
@@ -90,7 +90,7 @@
     "text_cleaner": "phoneme_cleaners",
     "enable_eos_bos_chars": false,
     "test_sentences_file": "",
-    "phoneme_cache_path": "../jsss_ver1_shortform_basic5000-1.1/phoneme_cache",
+    "phoneme_cache_path": "/home/nidhi/Documents/animedub/audio/TTS/recipes/ljspeech/tacotron2-DCA/phoneme_cache",
     "characters": {
         "characters_class": "TTS.tts.utils.text.characters.IPAPhonemes",
         "vocab_dict": null,
@@ -118,11 +118,11 @@
     "start_by_longest": false,
     "datasets": [
         {
-            "name": "jsss_ver1_shortform_basic5000",
-            "path": "/home/nidhi/Documents/animedub/audio/data/jsss_ver1/short-form/basic5000",
-            "meta_file_train": "/home/nidhi/Documents/animedub/audio/data/jsss_ver1/short-form/basic5000/metadata.txt",
+            "name": "ljspeech",
+            "path": "/home/nidhi/Documents/animedub/audio/TTS/recipes/ljspeech/tacotron2-DCA/../LJSpeech-1.1/",
+            "meta_file_train": "metadata.csv",
             "ignored_speakers": null,
-            "language": "ja",
+            "language": "",
             "meta_file_val": "",
             "meta_file_attn_mask": ""
         }

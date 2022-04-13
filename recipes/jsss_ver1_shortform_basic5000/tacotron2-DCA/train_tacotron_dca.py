@@ -10,6 +10,7 @@ from TTS.tts.datasets import load_tts_samples
 from TTS.tts.models.tacotron2 import Tacotron2
 from TTS.tts.utils.text.tokenizer import TTSTokenizer
 from TTS.utils.audio import AudioProcessor
+from TTS.tts.utils.text.phonemizers.ja_jp_phonemizer import JA_JP_Phonemizer
 
 
 # from TTS.tts.datasets.tokenizer import Tokenizer
@@ -23,7 +24,7 @@ dataset_config = BaseDatasetConfig(
     name="jsss_ver1_shortform_basic5000", 
     path = "/home/nidhi/Documents/animedub/audio/data/jsss_ver1/short-form/basic5000",
     meta_file_train="/home/nidhi/Documents/animedub/audio/data/jsss_ver1/short-form/basic5000/metadata.txt", 
-    language= "ja",
+    #language= "en-us",
     #path=os.path.join(output_path, "../jsss_ver1_shortform_basic5000-1.1/")
     )
 
@@ -83,7 +84,8 @@ config = Tacotron2Config(  # This is the config that is saved for the future use
     epochs=1000,
     text_cleaner="phoneme_cleaners",
     use_phonemes=True,
-    phoneme_language="en-us",
+    phonemizer = "ja_jp_phonemizer",
+    phoneme_language= "ja-jp",
     phoneme_cache_path=os.path.join(output_path, "phoneme_cache"),
     print_step=25,
     print_eval=True,

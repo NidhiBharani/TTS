@@ -193,8 +193,19 @@ class TTSDataset(Dataset):
         return waveform
 
     def get_phonemes(self, idx, text):
+        #print("_____________________________________________________")
+        #print("idx", idx)
+        #print("text",text)
+        #print(out_dict["text"])
+        #print("phoneme_dataset[idx]",self.phoneme_dataset[idx])
+        #print("_____________________________________________________")
+
         out_dict = self.phoneme_dataset[idx]
+        # print(out_dict)
+        # print("___________________________________")
+        # print(out_dict.keys)
         assert text == out_dict["text"], f"{text} != {out_dict['text']}"
+        #print("Token_Id_len", len(out_dict["token_ids"]))
         assert len(out_dict["token_ids"]) > 0
         return out_dict
 
