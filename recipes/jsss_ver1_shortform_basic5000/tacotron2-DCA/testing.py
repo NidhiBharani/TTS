@@ -1,6 +1,7 @@
 import os
 from trainer import Trainer, TrainerArgs
 import sys
+sys.path.append("/content/TTS") #for colab. to prevent ModuleNotFound error.
 import TTS
 print(os.path.dirname(TTS.__file__))
 from TTS.config.shared_configs import BaseAudioConfig
