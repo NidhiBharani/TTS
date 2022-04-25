@@ -2,6 +2,9 @@ import os
 
 from trainer import Trainer, TrainerArgs
 
+import sys
+sys.append("/content/TTS")
+
 from TTS.config.shared_configs import BaseAudioConfig
 from TTS.tts.configs.shared_configs import BaseDatasetConfig
 from TTS.tts.configs.tacotron2_config import Tacotron2Config
@@ -37,6 +40,7 @@ audio_config = BaseAudioConfig(
 config = Tacotron2Config(  # This is the config that is saved for the future use
     audio=audio_config,
     batch_size=8,
+    lr = 0.1,
     eval_batch_size=8,
     num_loader_workers=4,
     num_eval_loader_workers=4,
@@ -52,7 +56,7 @@ config = Tacotron2Config(  # This is the config that is saved for the future use
     r=2,
     attention_type="dynamic_convolution",
     double_decoder_consistency=False,
-    epochs=5,
+    epochs=1,
     text_cleaner="phoneme_cleaners",
     use_phonemes=True,
     phoneme_language="en-us",
