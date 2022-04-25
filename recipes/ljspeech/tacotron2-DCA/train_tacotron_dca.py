@@ -3,7 +3,7 @@ import os
 from trainer import Trainer, TrainerArgs
 
 import sys
-sys.append("/content/TTS")
+sys.path.append("/content/TTS")
 
 from TTS.config.shared_configs import BaseAudioConfig
 from TTS.tts.configs.shared_configs import BaseDatasetConfig
