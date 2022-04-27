@@ -15,7 +15,8 @@ from TTS.utils.audio import AudioProcessor
 
 # from TTS.tts.datasets.tokenizer import Tokenizer
 
-output_path = os.path.dirname(os.path.abspath(__file__))
+#output_path = os.path.dirname(os.path.abspath(__file__))
+output_path = "/content/drive/MyDrive/coqui-TTS/LJSpeech-1.1/output" #for colab 
 
 # init configs
 dataset_config = BaseDatasetConfig(
@@ -42,7 +43,7 @@ config = Tacotron2Config(  # This is the config that is saved for the future use
     batch_size=8,
     lr = 0.1,
     eval_batch_size=8,
-    num_loader_workers=4,
+    num_loader_workers=2, #warning from colab run that appropriate num_workers for that system is 2. If set to 4, training might slow or halt.
     num_eval_loader_workers=4,
     run_eval=True,
     test_delay_epochs=-1,
@@ -56,11 +57,11 @@ config = Tacotron2Config(  # This is the config that is saved for the future use
     r=2,
     attention_type="dynamic_convolution",
     double_decoder_consistency=False,
-    epochs=1,
+    epochs=3,
     text_cleaner="phoneme_cleaners",
     use_phonemes=True,
     phoneme_language="en-us",
-    phoneme_cache_path=os.path.join(output_path, "phoneme_cache"),
+    phoneme_cache_path="/content/drive/MyDrive/coqui-TTS/LJSpeech-1.1/output/phoneme_cache",
     print_step=25,
     print_eval=True,
     mixed_precision=False,
