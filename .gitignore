@@ -168,3 +168,6 @@ depot/*
 coqui_recipes/*
 output/
 coqui/
+
+#pretrained models
+pretrained_models/

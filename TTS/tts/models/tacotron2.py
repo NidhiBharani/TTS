@@ -269,11 +269,18 @@ class Tacotron2(BaseTacotron):
 
         # set the [alignment] lengths wrt reduction factor for guided attention
         if mel_lengths.max() % self.decoder.r != 0:
-            alignment_lengths = (
-                mel_lengths + (self.decoder.r - (mel_lengths.max() % self.decoder.r))
-            ) // self.decoder.r
+          #my code
+          alignment_lengths = torch.div((mel_lengths + (self.decoder.r - (mel_lengths.max() % self.decoder.r))), 
+          self.decoder.r, rounding_mode='trunc')
+          #print("alignment_lengths", alignment_lengths)
+
+          #PyTorch future deprecation warning for use of floor division (//)
+          #alignment_lengths = (mel_lengths + (self.decoder.r - (mel_lengths.max() % self.decoder.r))) // self.decoder.r
+        
         else:
-            alignment_lengths = mel_lengths // self.decoder.r
+            #alignment_lengths = mel_lengths // self.decoder.r
+            alignment_lengths = torch.div(mel_lengths,self.decoder.r , rounding_mode='trunc')
+
 
         aux_input = {"speaker_ids": speaker_ids, "d_vectors": d_vectors}
         outputs = self.forward(text_input, text_lengths, mel_input, mel_lengths, aux_input)
