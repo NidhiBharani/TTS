@@ -42,7 +42,7 @@ config = Tacotron2Config(  # This is the config that is saved for the future use
     audio=audio_config,
     batch_size=128,
     eval_batch_size=128,
-    num_loader_workers=6, #warning from colab run that appropriate num_workers for that system is 2. If set to 4, training might slow or halt.
+    num_loader_workers=4, #warning from colab run that appropriate num_workers for that system is 2. If set to 4, training might slow or halt.
     num_eval_loader_workers=2,
     run_eval=True,
     test_delay_epochs=-1,
@@ -63,7 +63,7 @@ config = Tacotron2Config(  # This is the config that is saved for the future use
     phoneme_cache_path= "~/phoneme_cache",
     print_step=25,
     print_eval=True,
-    mixed_precision=True,
+    mixed_precision=False,
     output_path=output_path,
     datasets=[dataset_config],
 )
