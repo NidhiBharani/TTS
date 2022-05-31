@@ -16,13 +16,13 @@ from TTS.utils.audio import AudioProcessor
 # from TTS.tts.datasets.tokenizer import Tokenizer
 
 #output_path = os.path.dirname(os.path.abspath(__file__))
-output_path = "/content/LJSpeech-1.1/output"
+output_path = "/content/workdir/output"
 
 # init configs
 dataset_config = BaseDatasetConfig(
     name="ljspeech", 
-    meta_file_train = "/content/LjSpeech-1.1/metadata.csv", #colab 
-    path= "/content/LjSpeech-1.1"
+    meta_file_train = "/content/workdir/metadata.csv", #colab 
+    path= "/content/workdir"
 )
 
 audio_config = BaseAudioConfig(
@@ -60,7 +60,7 @@ config = Tacotron2Config(  # This is the config that is saved for the future use
     text_cleaner="phoneme_cleaners",
     use_phonemes=True,
     phoneme_language="en-us",
-    phoneme_cache_path= "~/phoneme_cache", #output_path + 
+    phoneme_cache_path= "/phoneme_cache", #output_path + 
     print_step=25,
     print_eval=True,
     mixed_precision=False,
