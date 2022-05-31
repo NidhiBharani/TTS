@@ -54,7 +54,7 @@ def setup_loader(ap, r, verbose=False):
         drop_last=False,
         sampler=None,
         num_workers=c.num_loader_workers,
-        pin_memory=False,
+        pin_memory=True, #Custom
     )
     return loader
 

@@ -60,7 +60,7 @@ loader = DataLoader(
     collate_fn=dataset.collate_full_clips,
     drop_last=False,
     num_workers=config.num_loader_workers,
-    pin_memory=False,
+    pin_memory=True, #Custom
 )
 
 # setup the model
