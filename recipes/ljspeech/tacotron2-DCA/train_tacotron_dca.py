@@ -16,7 +16,8 @@ from TTS.utils.audio import AudioProcessor
 # from TTS.tts.datasets.tokenizer import Tokenizer
 
 #output_path = os.path.dirname(os.path.abspath(__file__))
-output_path = "/content/workdir/output"
+# output_path = "/content/workdir/output"
+output_path = "/content/drive/MyDrive/coqui-TTS/LJSpeech-1.1/output"
 
 # init configs
 dataset_config = BaseDatasetConfig(
