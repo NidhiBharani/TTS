@@ -40,9 +40,9 @@ audio_config = BaseAudioConfig(
 
 config = Tacotron2Config(  # This is the config that is saved for the future use
     audio=audio_config,
-    batch_size=64,
-    eval_batch_size=64,
-    num_loader_workers=2, #warning from colab run that appropriate num_workers for that system is 2. If set to 4, training might slow or halt.
+    batch_size=96,
+    eval_batch_size=96,
+    num_loader_workers=1, #warning from colab run that appropriate num_workers for that system is 2. If set to 4, training might slow or halt.
     num_eval_loader_workers=1,
     run_eval=True,
     test_delay_epochs=-1,
