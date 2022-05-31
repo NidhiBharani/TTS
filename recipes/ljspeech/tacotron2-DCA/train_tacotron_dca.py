@@ -22,7 +22,7 @@ output_path = "/content/drive/MyDrive/coqui-TTS/LJSpeech-1.1/output" #for colab
 dataset_config = BaseDatasetConfig(
     name="ljspeech", 
     meta_file_train="metadata.csv", 
-    path= "/content/drive/MyDrive/coqui-TTS/LJSpeech-1.1"  #colab
+    path= "~/LJSpeech-1.1"  #colab
 )
 
 audio_config = BaseAudioConfig(
@@ -60,7 +60,7 @@ config = Tacotron2Config(  # This is the config that is saved for the future use
     text_cleaner="phoneme_cleaners",
     use_phonemes=True,
     phoneme_language="en-us",
-    phoneme_cache_path= "~/phoneme_cache",
+    phoneme_cache_path= "~/LJSpeech-1.1/phoneme_cache",
     print_step=25,
     print_eval=True,
     mixed_precision=False,
