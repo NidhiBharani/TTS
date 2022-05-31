@@ -22,7 +22,7 @@ output_path = "~/LJSpeech-1.1"  #saving output locally. Trying to reduce I/O bou
 dataset_config = BaseDatasetConfig(
     name="ljspeech", 
     meta_file_train="/content/drive/MyDrive/coqui-TTS/LJSpeech-1.1/metadata.csv", #colab 
-    path= output_path
+    path= "/content/LjSpeech-1.1/"
 )
 
 audio_config = BaseAudioConfig(
@@ -60,7 +60,7 @@ config = Tacotron2Config(  # This is the config that is saved for the future use
     text_cleaner="phoneme_cleaners",
     use_phonemes=True,
     phoneme_language="en-us",
-    phoneme_cache_path= "~/LJSpeech-1.1/phoneme_cache",
+    phoneme_cache_path= output_path + "/phoneme_cache",
     print_step=25,
     print_eval=True,
     mixed_precision=False,
