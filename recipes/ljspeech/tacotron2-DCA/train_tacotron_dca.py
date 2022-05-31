@@ -16,13 +16,13 @@ from TTS.utils.audio import AudioProcessor
 # from TTS.tts.datasets.tokenizer import Tokenizer
 
 #output_path = os.path.dirname(os.path.abspath(__file__))
-output_path = "/content/drive/MyDrive/coqui-TTS/LJSpeech-1.1/output" #for colab 
+output_path = "~/LJSpeech-1.1"  #saving output locally. Trying to reduce I/O bound.  #for colab 
 
 # init configs
 dataset_config = BaseDatasetConfig(
     name="ljspeech", 
     meta_file_train="/content/drive/MyDrive/coqui-TTS/LJSpeech-1.1/metadata.csv", #colab 
-    path= "~/LJSpeech-1.1"  #saving output locally. Trying to reduce I/O bound. 
+    path= output_path
 )
 
 audio_config = BaseAudioConfig(
