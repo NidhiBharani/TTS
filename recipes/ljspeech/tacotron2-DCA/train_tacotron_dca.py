@@ -21,8 +21,8 @@ output_path = "/content/drive/MyDrive/coqui-TTS/LJSpeech-1.1/output" #for colab
 # init configs
 dataset_config = BaseDatasetConfig(
     name="ljspeech", 
-    meta_file_train="metadata.csv", 
-    path= "~/LJSpeech-1.1"  #colab
+    meta_file_train="/content/drive/MyDrive/coqui-TTS/LJSpeech-1.1/metadata.csv", #colab 
+    path= "~/LJSpeech-1.1"  #saving output locally. Trying to reduce I/O bound. 
 )
 
 audio_config = BaseAudioConfig(
