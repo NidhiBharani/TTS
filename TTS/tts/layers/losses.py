@@ -160,7 +160,7 @@ class BCELossMasked(nn.Module):
         if length is not None:
             mask = sequence_mask(sequence_length=length, max_len=target.size(1)).float()
             #debugging change in r. RuntimeError: The size of tensor a (18) must match the size of tensor b (21) at non-singleton dimension 1
-            print("mask shape", mask.size()))
+            print("mask shape", mask.size())
             print("x shape",x.size())
             x = x * mask
             target = target * mask
