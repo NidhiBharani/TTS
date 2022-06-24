@@ -340,6 +340,11 @@ class TacotronLoss(torch.nn.Module):
         # decoder and postnet losses
         if self.config.loss_masking:
             if self.decoder_alpha > 0:
+                # #debugging NaN losses
+                # print("decoder_output", decoder_output) #this part gives tensors containing NaNs
+                # print("mel_input", mel_input)   # tensors with floats
+                # print("output_lens", output_lens)  #tensors with floats
+
                 decoder_loss = self.criterion(decoder_output, mel_input, output_lens)
             if self.postnet_alpha > 0:
                 postnet_loss = self.criterion(postnet_output, postnet_target, output_lens)

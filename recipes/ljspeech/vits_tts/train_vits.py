@@ -10,9 +10,18 @@ from TTS.tts.models.vits import Vits
 from TTS.tts.utils.text.tokenizer import TTSTokenizer
 from TTS.utils.audio import AudioProcessor
 
-output_path = os.path.dirname(os.path.abspath(__file__))
+import sys
+sys.path.append("/content/TTS")
+
+#output_path = os.path.dirname(os.path.abspath(__file__))
+output_path = "/content/drive/MyDrive/coqui-TTS/LJSpeech-1.1/output/VITS" #for colab 
+#output_path = os.path.dirname(os.path.abspath(__file__))
+
+#init configs
 dataset_config = BaseDatasetConfig(
-    name="ljspeech", meta_file_train="metadata.csv", path=os.path.join(output_path, "../LJSpeech-1.1/")
+    name="ljspeech", 
+    meta_file_train="metadata.csv", 
+    path= "/content/drive/MyDrive/coqui-TTS/LJSpeech-1.1"  #colab
 )
 audio_config = BaseAudioConfig(
     sample_rate=22050,
