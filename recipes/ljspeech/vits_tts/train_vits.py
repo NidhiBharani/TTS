@@ -2,6 +2,9 @@ import os
 
 from trainer import Trainer, TrainerArgs
 
+import sys
+sys.path.append("/content/TTS")
+
 from TTS.config.shared_configs import BaseAudioConfig
 from TTS.tts.configs.shared_configs import BaseDatasetConfig
 from TTS.tts.configs.vits_config import VitsConfig
@@ -10,8 +13,6 @@ from TTS.tts.models.vits import Vits
 from TTS.tts.utils.text.tokenizer import TTSTokenizer
 from TTS.utils.audio import AudioProcessor
 
-import sys
-sys.path.append("/content/TTS")
 
 #output_path = os.path.dirname(os.path.abspath(__file__))
 output_path = "/content/drive/MyDrive/coqui-TTS/LJSpeech-1.1/output/VITS" #for colab 
