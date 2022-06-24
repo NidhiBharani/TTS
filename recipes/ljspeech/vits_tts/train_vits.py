@@ -21,8 +21,8 @@ output_path = "/content/drive/MyDrive/coqui-TTS/LJSpeech-1.1/output/VITS" #for c
 #init configs
 dataset_config = BaseDatasetConfig(
     name="ljspeech", 
-    meta_file_train="metadata.csv", 
-    path= "/content/drive/MyDrive/coqui-TTS/LJSpeech-1.1"  #colab
+    meta_file_train = "/content/workdir/metadata.csv", #colab 
+    path= "/content/workdir"
 )
 audio_config = BaseAudioConfig(
     sample_rate=22050,
@@ -55,7 +55,7 @@ config = VitsConfig(
     text_cleaner="english_cleaners",
     use_phonemes=True,
     phoneme_language="en-us",
-    phoneme_cache_path=os.path.join(output_path, "phoneme_cache"),
+    phoneme_cache_path= "/phoneme_cache", #output_path + 
     compute_input_seq_cache=True,
     print_step=25,
     print_eval=True,
