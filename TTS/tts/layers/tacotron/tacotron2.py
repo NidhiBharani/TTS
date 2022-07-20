@@ -92,11 +92,12 @@ class Encoder(nn.Module):
         self.rnn_state = None
 
     def forward(self, x, input_lengths):
-        o = x   
+        o = x                                      ##text input
         print("Encoder forward pass")
-        print("input shape",o.size())                          #text input
+        print("input shape",o.size())              # [batch_size, embedding shape(512), variable length(I think max text length in batch)]            
         for layer in self.convolutions:   # apply 3 convolutions
             o = layer(o)
+            print("shape after convolution",o.size())
         o = o.transpose(1, 2)             #transpose output along 2nd and 3rd axis.
         o = nn.utils.rnn.pack_padded_sequence(o, input_lengths.cpu(), batch_first=True)
         self.lstm.flatten_parameters()
