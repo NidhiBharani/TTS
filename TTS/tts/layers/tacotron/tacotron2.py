@@ -94,7 +94,7 @@ class Encoder(nn.Module):
     def forward(self, x, input_lengths):
         o = x   
         print("Encoder forward pass")
-        print("input shape",o.shape())                          #text input
+        print("input shape",o.size())                          #text input
         for layer in self.convolutions:   # apply 3 convolutions
             o = layer(o)
         o = o.transpose(1, 2)             #transpose output along 2nd and 3rd axis.
