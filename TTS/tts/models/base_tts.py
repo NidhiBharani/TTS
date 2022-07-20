@@ -54,21 +54,21 @@ class BaseTTS(BaseTrainerModel):
         If the config is for the model with a name like "*Args", then we assign the directly.
         """
         # don't use isintance not to import recursively
-        if "Config" in config.__class__.__name__:
-            config_num_chars = (
-                self.config.model_args.num_chars if hasattr(self.config, "model_args") else self.config.num_chars
-            )
-            num_chars = config_num_chars if self.tokenizer is None else self.tokenizer.characters.num_chars
-            if "characters" in config:
-                self.config.num_chars = num_chars
-                if hasattr(self.config, "model_args"):
+        if "Config" in config.__class__.__name__:           #Config file name must have "Config" in it. e.g. Config.json
+            config_num_chars = (                                                                                  #whats num_chars?
+                self.config.model_args.num_chars if hasattr(self.config, "model_args") else self.config.num_chars #first searches config.model_args.num_chars
+            )                                                                                                     #second config.num_chars
+            num_chars = config_num_chars if self.tokenizer is None else self.tokenizer.characters.num_chars       #num_chars written in tokenizer, override config values.
+            if "characters" in config:                          
+                self.config.num_chars = num_chars            #take num_chars from config
+                if hasattr(self.config, "model_args"):       #assign config values to existing "model_args" in config or create model_args with new values
                     config.model_args.num_chars = num_chars
                     self.args = self.config.model_args
             else:
                 self.config = config
                 self.args = config.model_args
-        elif "Args" in config.__class__.__name__:
-            self.args = config
+        elif "Args" in config.__class__.__name__:         #if somehow config file created with "Args", create config file from it. 
+            self.args = config                            #for instance, running tacotron for the first time. It creates its own config.
         else:
             raise ValueError("config must be either a *Config or *Args")
 
@@ -187,26 +187,26 @@ class BaseTTS(BaseTrainerModel):
 
         # compute durations from attention masks
         durations = None
-        if attn_mask is not None:
-            durations = torch.zeros(attn_mask.shape[0], attn_mask.shape[2])
+        if attn_mask is not None:                                                   #whats the shape of attn_mask.
+            durations = torch.zeros(attn_mask.shape[0], attn_mask.shape[2])         #how? 1st and 3rd dimension of the attn_mask 
             for idx, am in enumerate(attn_mask):
-                # compute raw durations
-                c_idxs = am[:, : text_lengths[idx], : mel_lengths[idx]].max(1)[1]
-                # c_idxs, counts = torch.unique_consecutive(c_idxs, return_counts=True)
-                c_idxs, counts = torch.unique(c_idxs, return_counts=True)
-                dur = torch.ones([text_lengths[idx]]).to(counts.dtype)
-                dur[c_idxs] = counts
+                # compute raw durations                                     
+                c_idxs = am[:, : text_lengths[idx], : mel_lengths[idx]].max(1)[1]   #whats c_idx? whats .max(1)[1]? 
+                # c_idxs, counts = torch.unique_consecutive(c_idxs, return_counts=True)   # attn_mask shape = 3 inferred from this line.
+                c_idxs, counts = torch.unique(c_idxs, return_counts=True)              #counting unique c_idxs
+                dur = torch.ones([text_lengths[idx]]).to(counts.dtype)                 #set duration to text length. I think.
+                dur[c_idxs] = counts                                                   #?
                 # smooth the durations and set any 0 duration to 1
                 # by cutting off from the largest duration indeces.
                 extra_frames = dur.sum() - mel_lengths[idx]
                 largest_idxs = torch.argsort(-dur)[:extra_frames]
                 dur[largest_idxs] -= 1
-                assert (
+                assert (                                                              # duration should be equal to mel spectrogram of text
                     dur.sum() == mel_lengths[idx]
                 ), f" [!] total duration {dur.sum()} vs spectrogram length {mel_lengths[idx]}"
                 durations[idx, : text_lengths[idx]] = dur
 
-        # set stop targets wrt reduction factor
+        # set stop targets wrt reduction factor          # something to do with r and stop_targets. What are stop_targets?
         stop_targets = stop_targets.view(text_input.shape[0], stop_targets.size(1) // self.config.r, -1)
         stop_targets = (stop_targets.sum(2) > 0.0).unsqueeze(2).float().squeeze(2)
         stop_target_lengths = torch.divide(mel_lengths, self.config.r).ceil_()
@@ -293,7 +293,7 @@ class BaseTTS(BaseTrainerModel):
                 language_id_mapping=language_id_mapping,
             )
 
-            # wait all the DDP process to be ready
+            # wait all the DDP process to be ready        #something to do with distributed data parallelization(DDP) in PyTorch
             if num_gpus > 1:
                 dist.barrier()
 

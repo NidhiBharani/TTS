@@ -83,19 +83,21 @@ class Encoder(nn.Module):
 
     def __init__(self, in_out_channels=512):
         super().__init__()
-        self.convolutions = nn.ModuleList()
-        for _ in range(3):
-            self.convolutions.append(ConvBNBlock(in_out_channels, in_out_channels, 5, "relu"))
-        self.lstm = nn.LSTM(
+        self.convolutions = nn.ModuleList()        #ModuleList to automate creation of layers in PyTorch (see GoodNotes)
+        for _ in range(3):                         # 3 1D convolutions layers constructed here.
+            self.convolutions.append(ConvBNBlock(in_out_channels, in_out_channels, 5, "relu")) #this is how ModuleList is used.
+        self.lstm = nn.LSTM(                       #3 1D conv layers ---> bidirectional LSTM 
             in_out_channels, int(in_out_channels / 2), num_layers=1, batch_first=True, bias=True, bidirectional=True
         )
         self.rnn_state = None
 
     def forward(self, x, input_lengths):
-        o = x
-        for layer in self.convolutions:
+        o = x   
+        print("Encoder forward pass")
+        print("input shape",o.shape())                          #text input
+        for layer in self.convolutions:   # apply 3 convolutions
             o = layer(o)
-        o = o.transpose(1, 2)
+        o = o.transpose(1, 2)             #transpose output along 2nd and 3rd axis.
         o = nn.utils.rnn.pack_padded_sequence(o, input_lengths.cpu(), batch_first=True)
         self.lstm.flatten_parameters()
         o, _ = self.lstm(o)
@@ -106,7 +108,7 @@ class Encoder(nn.Module):
         o = x
         for layer in self.convolutions:
             o = layer(o)
-        o = o.transpose(1, 2)
+        o = o.transpose(1, 2)        
         # self.lstm.flatten_parameters()
         o, _ = self.lstm(o)
         return o

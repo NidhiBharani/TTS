@@ -50,7 +50,7 @@ class Tacotron2(BaseTacotron):
 
         super().__init__(config, ap, tokenizer, speaker_manager)
 
-        self.decoder_output_dim = config.out_channels
+        self.decoder_output_dim = config.out_channels          #decoder_output_dim? decoder?
 
         # pass all config fields to `self`
         # for fewer code change
@@ -58,11 +58,11 @@ class Tacotron2(BaseTacotron):
             setattr(self, key, config[key])
 
         # init multi-speaker layers
-        if self.use_speaker_embedding or self.use_d_vector_file:
-            self.init_multispeaker(config)
+        if self.use_speaker_embedding or self.use_d_vector_file:  # speaker embedding = decoder input. I think decoder = early part of Tacotron.
+            self.init_multispeaker(config)                        #init_speaker defined in base_tts class.
             self.decoder_in_features += self.embedded_speaker_dim  # add speaker embedding dim
 
-        if self.use_gst:
+        if self.use_gst:    #whats gst? gst = decoder input too
             self.decoder_in_features += self.gst.gst_embedding_dim
 
         # embedding layer
