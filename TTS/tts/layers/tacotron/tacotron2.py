@@ -101,8 +101,8 @@ class Encoder(nn.Module):
         o = o.transpose(1, 2)             #transpose output along 2nd and 3rd axis.
         print("after transpose",o.size())
         o = nn.utils.rnn.pack_padded_sequence(o, input_lengths.cpu(), batch_first=True)   #tuple= (flattened sequences(along axis=1), variable batch_size tensor)
-        print("After packed padding, sequences tensor",o[0].size())
-        print("After packed padding, batch_size tensor",o[1].size())
+        print("After packed padding, sequences tensor",o.data)
+        print("After packed padding, batch_size tensor",o.batch_sizes)
         self.lstm.flatten_parameters()
         o, _ = self.lstm(o)
         print("After LSTM",o.size())
