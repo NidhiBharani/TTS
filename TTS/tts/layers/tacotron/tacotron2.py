@@ -99,10 +99,14 @@ class Encoder(nn.Module):
             o = layer(o)
             print("shape after convolution",o.size())
         o = o.transpose(1, 2)             #transpose output along 2nd and 3rd axis.
+        print("after transpose",o.size())
         o = nn.utils.rnn.pack_padded_sequence(o, input_lengths.cpu(), batch_first=True)
+        print("After packed padded sequence",o.size())
         self.lstm.flatten_parameters()
         o, _ = self.lstm(o)
+        print("After LSTM",o.size())
         o, _ = nn.utils.rnn.pad_packed_sequence(o, batch_first=True)
+        print("After 2nd packed padding", o.size())
         return o
 
     def inference(self, x):
