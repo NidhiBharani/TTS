@@ -103,6 +103,7 @@ class Encoder(nn.Module):
         o = nn.utils.rnn.pack_padded_sequence(o, input_lengths.cpu(), batch_first=True)   #returns a PackedSequence object
         print("After packed padding, sequences tensor",o.data.size())
         print("After packed padding, batch_size tensor",o.batch_sizes.size())
+        print("1st 10 packed padded batch sizes",o.batch_sizes[:10])
         self.lstm.flatten_parameters()
         o, _ = self.lstm(o)            # _ =hidden_dim. hidden_dim = tuple(hidden_state,cell_state). hidden_state= timestep-dependent. cell_state= long memory.
         print("After LSTM",o.data.size())   # o after lstm= [batch_size, #outputs(i.e. sequence length), hidden_dim]
