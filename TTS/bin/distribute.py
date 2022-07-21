@@ -45,7 +45,7 @@ def main():
         stdout = None
         p = subprocess.Popen(["python3"] + command, stdout=stdout, env=my_env)  # pylint: disable=consider-using-with
         processes.append(p)
-        print(command)
+        print("command: " + str(command))
 
     for p in processes:
         p.wait()

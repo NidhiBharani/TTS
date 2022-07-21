@@ -353,7 +353,7 @@ class GAN(BaseVocoder):
             drop_last=False,
             sampler=sampler,
             num_workers=config.num_eval_loader_workers if is_eval else config.num_loader_workers,
-            pin_memory=False,
+            pin_memory=True, #Custom
         )
         return loader
 

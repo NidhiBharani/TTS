@@ -182,6 +182,9 @@ def synthesis(
     text_inputs = text_inputs.unsqueeze(0)
     # synthesize voice
     outputs = run_model_torch(model, text_inputs, speaker_id, style_mel, d_vector=d_vector, language_id=language_id)
+    #debugging test sentences not getting generated.
+    # print("Debugging TEST SENTENCES")
+    # print("output variable generated while running inference with test sentences",outputs.keys)
     model_outputs = outputs["model_outputs"]
     model_outputs = model_outputs[0].data.cpu().numpy()
     alignments = outputs["alignments"]

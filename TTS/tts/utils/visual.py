@@ -151,7 +151,7 @@ def visualize(
     if CONFIG.use_phonemes:
         seq = tokenizer.text_to_ids(text)
         text = tokenizer.ids_to_text(seq)
-        print(text)
+        print("text:"+str(text))
     plt.yticks(range(len(text)), list(text))
     plt.colorbar()
 
@@ -194,7 +194,7 @@ def visualize(
         plt.colorbar()
 
     if output_path:
-        print(output_path)
+        print("output_path: " + str(output_path))
         fig.savefig(output_path)
         plt.close()
 

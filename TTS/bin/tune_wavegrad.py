@@ -60,7 +60,7 @@ loader = DataLoader(
     collate_fn=dataset.collate_full_clips,
     drop_last=False,
     num_workers=config.num_loader_workers,
-    pin_memory=False,
+    pin_memory=True, #Custom
 )
 
 # setup the model
@@ -70,7 +70,7 @@ if args.use_cuda:
 
 # setup optimization parameters
 base_values = sorted(10 * np.random.uniform(size=args.search_depth))
-print(base_values)
+print("base_values"+ str(base_values))
 exponents = 10 ** np.linspace(-6, -1, num=args.num_iter)
 best_error = float("inf")
 best_schedule = None

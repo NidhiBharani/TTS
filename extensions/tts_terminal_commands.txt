@@ -1,0 +1,132 @@
+tts --text "Hi! I am the neural network speaking to you from the beyond." \
+    --model_name "tts_models/en/ljspeech/tacotron2-DDC" \
+    --out_path coqui-output/Hi_IamTTS.wav
+    
+#own voice cloning
+# replace `REPLACE_THIS_WITH_NAME_OF_FILE`
+
+sudo tts --out_path output_file.wav --model_name tts_models/multilingual/multi-dataset/your_tts
+ --speaker_wav ~/REPLACE_THIS_WITH_NAME_OF_FILE.wav --language_idx 'en' --text "Had European nations remained on the gold standard, or had the pe
+ople of Europe held their own gold in their own hands, forcing government to resort to taxation instead of inflation, history
+ might have been different. It is likely that World War One would have been settled militarily within a few months of conflic
+t"
+
+#churchill----> justin bieber baby
+# replace `REPLACE_THIS_WITH_NAME_OF_FILE`
+
+sudo tts --out_path output_file.wav --model_name tts_models/multilingual/multi-dataset/your_tts
+ --speaker_wav /home/nidhi/Documents/animedub/audio/data/churchill_nazi_speech.wav --language_idx 'en' --text "You know you love me, I know you care
+Just shout whenever and I'll be there
+You are my love, you are my heart
+And we will never, ever, ever be apart
+Are we an item? Girl, quit playing
+We're just friends, what are you saying?
+Said, "There's another" and look right in my eyes
+My first love broke my heart for the first time and I was like
+Baby, baby, baby, oh
+Like baby, baby, baby, no
+Like baby, baby, baby, oh
+Thought you'd always be mine, mine
+Baby, baby, baby, oh
+Like baby, baby, baby, no
+Like baby, baby, baby, oh
+Thought you'd always be mine, mine"
+
+#changed command
+tts --out_path /coqui-output/churchill_bieber.wav --model_name tts_models/multilingual/multi-dataset/your_tts --speaker_wav /home/nidhi/Documents/animedub/audio/data/churchill_nazi_speech.wav --language_idx 'en' --text "You know you love me, I know you care
+Just shout whenever and I'll be there
+You are my love, you are my heart
+And we will never, ever, ever be apart
+Are we an item? Girl, quit playing
+We're just friends, what are you saying?
+Said, There's another and look right in my eyes  
+My first love broke my heart for the first time and I was like
+Baby, baby, baby, oh
+Like baby, baby, baby, no
+Like baby, baby, baby, oh
+Thought you'd always be mine, mine
+Baby, baby, baby, oh
+Like baby, baby, baby, no
+Like baby, baby, baby, oh
+Thought you'd always be mine, mine"
+
+#churchill--->happy
+tts --out_path coqui-output/churchill_happy.wav --model_name tts_models/multilingual/multi-dataset/your_tts --speaker_wav /home/nidhi/Documents/animedub/audio/data/churchill_nazi_speech.wav --language_idx 'en' --text "It might seem crazy what I am 'bout to say
+Sunshine she's here, you can take a break
+I'm a hot air balloon that could go to space
+With the air, like I don't care, baby by the way
+Huh (Because I'm happy)
+Clap along if you feel like a room without a roof
+(Because I'm happy)
+Clap along if you feel like happiness is the truth
+(Because I'm happy)
+Clap along if you know what happiness is to you
+(Because I'm happy)
+Clap along if you feel like that's what you wanna do"
+
+#Churchill---> yesterday
+tts --out_path coqui-output/churchill_yesterday.wav --model_name tts_models/multilingual/multi-dataset/your_tts --speaker_wav /home/nidhi/Documents/animedub/audio/data/churchill_nazi_speech.wav --language_idx 'en' --text "Yesterday
+All my trouble seemed so far away
+Now it looks as though they're here to stay
+Oh, I believe in yesterday
+Suddenly
+I'm not half the man I used to be
+There's a shadow hanging over me
+Oh, yesterday came suddenly
+Why she had to go, I don't know
+She wouldn't say
+I said something wrong
+Now I long for yesterday
+Yesterday
+Love was such an easy game to play
+Now I need a place to hide away
+Oh, I believe in yesterday
+Why she had to go, I don't know
+She wouldn't say
+I said something wrong
+Now I long for yesterday
+Yesterday
+Love was such an easy game to play
+Now I need a place to hide away
+Oh, I believe in yesterday"
+
+#japanese common voice (common_voice_ja_19482480.mp3) ---> yesterday
+tts --out_path coqui-output/cv8__yesterday.wav --model_name tts_models/multilingual/multi-dataset/your_tts --speaker_wav /home/nidhi/Documents/animedub/audio/data/cv-corpus-8.0-2022-01-19/ja/clips/common_voice_ja_19482480.mp3 --language_idx 'en' --text "Yesterday
+All my trouble seemed so far away
+Now it looks as though they're here to stay
+Oh, I believe in yesterday
+Suddenly
+I'm not half the man I used to be
+There's a shadow hanging over me
+Oh, yesterday came suddenly
+Why she had to go, I don't know
+She wouldn't say
+I said something wrong
+Now I long for yesterday
+Yesterday
+Love was such an easy game to play
+Now I need a place to hide away
+Oh, I believe in yesterday
+Why she had to go, I don't know
+She wouldn't say
+I said something wrong
+Now I long for yesterday
+Yesterday
+Love was such an easy game to play
+Now I need a place to hide away
+Oh, I believe in yesterday"
+
+
+#churchill--->hindi song
+tts --out_path coqui-output/churchill_gehraiyaan.wav --model_name tts_models/multilingual/multi-dataset/your_tts --speaker_wav /home/nidhi/Documents/animedub/audio/data/cv-corpus-8.0-2022-01-19/ja/clips/common_voice_ja_19482480.mp3 --language_idx 'en' --text "u Marz Hai Dava Bhi
+Par Aadat Hai Humein
+Roka Hai Khud Ko Lekin
+Hum Reh Na Sake
+
+Teri Lehron Mein Aa Kar
+Aise Hum Bahe
+Le Doobi Ja Rahi Hai
+Gehraiyaan Humein
+
+Gehraiyaan, Gehraiyaan"
+

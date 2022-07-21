@@ -72,6 +72,9 @@ class BaseVocabulary:
     def vocab(self, vocab):
         """Set the vocabulary dictionary and character mapping dictionaries."""
         self._vocab = vocab
+        print("Set the vocabulary dictionary and character mapping dictionaries")
+        print(vocab)
+        enumerate(self._vocab)
         self._char_to_id = {char: idx for idx, char in enumerate(self._vocab)}
         self._id_to_char = {
             idx: char for idx, char in enumerate(self._vocab)  # pylint: disable=unnecessary-comprehension

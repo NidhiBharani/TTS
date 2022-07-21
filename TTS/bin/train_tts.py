@@ -1,6 +1,9 @@
 import os
 from dataclasses import dataclass, field
 
+import sys
+sys.path.append("/content/TTS") #for colab
+
 from trainer import Trainer, TrainerArgs
 
 from TTS.config import load_config, register_config

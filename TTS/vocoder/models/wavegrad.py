@@ -330,7 +330,7 @@ class Wavegrad(BaseVocoder):
             drop_last=False,
             sampler=sampler,
             num_workers=self.config.num_eval_loader_workers if is_eval else self.config.num_loader_workers,
-            pin_memory=False,
+            pin_memory=True, #Custom
         )
         return loader
 
