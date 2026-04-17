@@ -207,3 +207,4 @@ If you are on Windows, 👑@GuyPaddock wrote installation instructions [here](ht
     |- vocoder/         (Vocoder models.)
         |- (same)
 ```
+# coqui_tts
