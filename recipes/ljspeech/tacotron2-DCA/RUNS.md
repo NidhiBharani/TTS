@@ -5,6 +5,13 @@ NaN**. This file records what happened and why: the cause is an interaction betw
 config keys that is not visible from any one of them, and the emitted logs that show it are
 not in this repo.
 
+> **These two runs are early attempts, not the end of the project.** Training continued
+> through July 2022 — six further runs, including VITS trained to **830,000 steps**
+> (`vits_ljspeech-July-13-2022`) and a Tacotron checkpoint at step 154,775
+> (`run-June-11-2022`), plus GlowTTS and YourTTS inference samples from October 2022. Those
+> runs are archived outside git and are **not** described here. Do not read the April
+> failures below as the project's outcome; they are its first week.
+
 > **Dates:** all the work described here is from **April 2022**. If this file carries a later
 > commit date, that is an archival commit — see [Reading this repo's history](#reading-this-repos-history).
 
@@ -92,6 +99,8 @@ not a typo for `4000`.
 - On resume, set the optimizer LR explicitly rather than trusting the config.
 - Resume from **Run 1's** checkpoint. Run 2 saved nothing usable after the NaN, and neither
   run trained long enough to form attention alignment — which remains the real blocker.
+- Better still, start from the later 2022 runs rather than either of these. The June/July
+  VITS and Tacotron checkpoints are orders of magnitude further along; see the archive.
 
 ---
 
