@@ -136,22 +136,28 @@ class LSTMSpeakerEncoder(nn.Module):
         Generate embeddings for a batch of utterances
         x: 1xTxD
         """
-        max_len = x.shape[1]
+        max_len = x.shape[1]        # max_len = num_frames calculated from sample.
 
-        if max_len < num_frames:
-            num_frames = max_len
+        if max_len < num_frames:    #if max_len < assigned num_frames in config, 
+            num_frames = max_len    #then change num_frames to match the sample.
+        
+        #if max_len > num_frames
+        #generate evenly spaced offsets. Offsets?
+        #offsets- parameter created to generate mel-spectogram frames to input into "inference" function
+        #Question- Don't we need to do this for max_len <= num_frames?
 
-        offsets = np.linspace(0, max_len - num_frames, num=num_eval)
+        offsets = np.linspace(0, max_len - num_frames, num=num_eval)  #np.linspace(2.0, 3.0, num=5) = array([2.  , 2.25, 2.5 , 2.75, 3.  ])
 
-        frames_batch = []
+        frames_batch = []         
         for offset in offsets:
             offset = int(offset)
             end_offset = int(offset + num_frames)
             frames = x[:, offset:end_offset]
             frames_batch.append(frames)
-
-        frames_batch = torch.cat(frames_batch, dim=0)
-        embeddings = self.inference(frames_batch)
+        
+        #frames_batch = num(offsets) x dimensions_of_frames
+        frames_batch = torch.cat(frames_batch, dim=0) #concatenate all frames together
+        embeddings = self.inference(frames_batch) # get l2_norm of all frames
 
         if return_mean:
             embeddings = torch.mean(embeddings, dim=0, keepdim=True)

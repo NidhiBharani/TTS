@@ -83,30 +83,39 @@ class Encoder(nn.Module):
 
     def __init__(self, in_out_channels=512):
         super().__init__()
-        self.convolutions = nn.ModuleList()
-        for _ in range(3):
-            self.convolutions.append(ConvBNBlock(in_out_channels, in_out_channels, 5, "relu"))
-        self.lstm = nn.LSTM(
+        self.convolutions = nn.ModuleList()        #ModuleList to automate creation of layers in PyTorch (see GoodNotes)
+        for _ in range(3):                         # 3 1D convolutions layers constructed here.
+            self.convolutions.append(ConvBNBlock(in_out_channels, in_out_channels, 5, "relu")) #this is how ModuleList is used.
+        self.lstm = nn.LSTM(                       #3 1D conv layers ---> bidirectional LSTM 
             in_out_channels, int(in_out_channels / 2), num_layers=1, batch_first=True, bias=True, bidirectional=True
         )
         self.rnn_state = None
 
     def forward(self, x, input_lengths):
-        o = x
-        for layer in self.convolutions:
+        o = x                                      ##text input
+        print("Encoder forward pass")
+        print("input shape",o.size())              # [batch_size, embedding shape(512), variable length(I think max text length in batch)]            
+        for layer in self.convolutions:   # apply 3 convolutions
             o = layer(o)
-        o = o.transpose(1, 2)
-        o = nn.utils.rnn.pack_padded_sequence(o, input_lengths.cpu(), batch_first=True)
+            print("shape after convolution",o.size())
+        o = o.transpose(1, 2)             #transpose output along 2nd and 3rd axis.
+        print("after transpose",o.size())
+        o = nn.utils.rnn.pack_padded_sequence(o, input_lengths.cpu(), batch_first=True)   #returns a PackedSequence object
+        print("After packed padding, sequences tensor",o.data.size())
+        print("After packed padding, batch_size tensor",o.batch_sizes.size())
+        print("1st 10 packed padded batch sizes",o.batch_sizes[:10])
         self.lstm.flatten_parameters()
-        o, _ = self.lstm(o)
+        o, _ = self.lstm(o)            # _ =hidden_dim. hidden_dim = tuple(hidden_state,cell_state). hidden_state= timestep-dependent. cell_state= long memory.
+        print("After LSTM",o.data.size())   # o after lstm= [batch_size, #outputs(i.e. sequence length), hidden_dim]
         o, _ = nn.utils.rnn.pad_packed_sequence(o, batch_first=True)
+        print("After 2nd packed padding, sequences tensor",o.size())
         return o
 
     def inference(self, x):
         o = x
         for layer in self.convolutions:
             o = layer(o)
-        o = o.transpose(1, 2)
+        o = o.transpose(1, 2)        
         # self.lstm.flatten_parameters()
         o, _ = self.lstm(o)
         return o

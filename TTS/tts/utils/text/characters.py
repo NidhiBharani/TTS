@@ -72,7 +72,7 @@ class BaseVocabulary:
     def vocab(self, vocab):
         """Set the vocabulary dictionary and character mapping dictionaries."""
         self._vocab = vocab
-        print("____________________________vocab_____________________________")
+        print("Set the vocabulary dictionary and character mapping dictionaries")
         print(vocab)
         enumerate(self._vocab)
         self._char_to_id = {char: idx for idx, char in enumerate(self._vocab)}
